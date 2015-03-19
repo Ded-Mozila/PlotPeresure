@@ -1,0 +1,24 @@
+from numpy import reshape
+from pylab import *
+
+NX=80
+NY=80
+
+# read gnuplot x-y-z datafile, skip empty lines
+d=[i.strip().split() for i in
+	open("sampledata.txt").readlines()
+	if len(i.strip()) > 0]
+# tranpose the list of lists
+d=zip(*d)
+# convert strings to floats
+X=[float(i) for i in d[0]]
+Y=[float(i) for i in d[1]]
+Z=[float(i) for i in d[2]]
+# reshape them to be 2D arrays
+X=reshape(X,(NX,NY))
+Y=reshape(Y,(NX,NY))
+Z=reshape(Z,(NX,NY))
+# finally plot it
+cset=contour(X,Y,Z,colors='black')
+clabel(cset,fmt="%1.1f",fontsize=9)
+savefig('pylab.eps')
