@@ -35,7 +35,7 @@ def printlon(ar):
 def strInt(index):
 	if index < 10:
 		return "0" +str(index)
-	return str(index) 
+	return str(index)
 def main():
 	img=mpimg.imread('img_100.png')
 	levs = range(840,1200,5)
@@ -43,14 +43,15 @@ def main():
 	str = fs.readline()
 	fs.close()
 	lt = dirList(str)
-	# lat = openFile("lat.grd")
-	# lon = absl(openFile("lon.grd"))
+	lat = openFile("lat.grd")
+	lon = absl(openFile("lon.grd"))
 	# printlon(lon)
 	for name in lt:
 			os.makedirs(name+"/gif/",0755 )
 			file_dir = dirList(str+'/'+name)
 			for q in file_dir:
 				f_dir = dirList(str+'/'+name+"/"+q)
+				print str+'/'+name+"/"+q
 				for x in f_dir:
 					if x.find("presure") != -1:
 						print x
@@ -59,9 +60,9 @@ def main():
 						plt.clf()
 						# img = mpimg.imread('d01_khv75_blank.png')
 						# plt.imshow(img)
-						plt.imshow(img,extent=[0,500,0,400])
-						# CS = plt.contour(lon,lat,presure,levs,
-						CS = plt.contour(presure,levs,
+						plt.imshow(img,extent=[102,173,14,68])
+						CS = plt.contour(lon,lat,presure,levs,extent=[102,173,14,68],
+						# CS = plt.contour(presure,levs,
 		                 origin='lower',
 		                 linewidths=1,
 		                 antialiased=True,
@@ -70,7 +71,7 @@ def main():
 						plt.clabel(CS,inline=1,
 		                 inline_spacing=0,fontsize=8,fmt='%2.0f',colors='black')
 						plt.title('Simplest default with ' + x)
-						plt.savefig(name+'/gif/'+ x + '.png',pad_inches=0.05, dpi=100)
+						plt.savefig(name+'/gif/'+ x + '.png',pad_inches=0.05, dpi=180,figsize=[800,600])
 						plt.close(fig)
 	return 0
 
